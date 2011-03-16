@@ -31,6 +31,10 @@ Dashboard.RowView = SC.View.extend( SC.ContentDisplay,
         '<span class="dashboard-cell ', key, '">', content.get(key), '</span>'
       );
     }
-  }
+    
+    context.addClass(this._statusClasses[content.get('status')]);
+  },
+  
+  _statusClasses: ['green', 'yellow', 'orange', 'red']
 
 });

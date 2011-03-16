@@ -6,6 +6,8 @@
 
 // This code is only available during development.
 
+sc_require('models/shift');
+
 Dashboard.FIXTURES = [];
 
 /* The SQL table:
@@ -19,18 +21,24 @@ Dashboard.FIXTURES = [];
   [source] [varchar](50) NULL
 */
 (function() {
-  var now = SC.DateTime.create().toFormattedString('%H:%M'),
+  var now = [
+        SC.DateTime.create().toFormattedString('%H:%M'),
+        SC.DateTime.create().adjust({ minute: 16 }).toFormattedString('%H:%M'),
+        SC.DateTime.create().adjust({ minute: 31 }).toFormattedString('%H:%M'),
+        SC.DateTime.create().adjust({ minute: 61 }).toFormattedString('%H:%M')
+      ],
       idx, len;
 
   for (idx=0, len=100; idx<len; ++idx) {
-    Dashboard.FIXTURES.pushObject(SC.Object.create({
+    Dashboard.FIXTURES.pushObject(Dashboard.Shift.create({
       client: 'Client ' + idx,
-      roster: now,
-      start: now,
-      finish: now,
-      callTaken: now,
+      roster: now[0],
+      start: now[0],
+      finish: now[0],
+      callTaken: now[idx % 4],
       employee: 'Employee ' + idx * 2,
-      source: 'Source ' + idx % 2
+      source: 'Source ' + idx % 2,
+      status: idx % 4
     }));
   }
   

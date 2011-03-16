@@ -10,6 +10,22 @@
   display: table-row;
 }
 
+.dashboard-row.green {
+  background-color: green;
+}
+
+.dashboard-row.yellow {
+  background-color: yellow;
+}
+
+.dashboard-row.orange {
+  background-color: orange;
+}
+
+.dashboard-row.red {
+  background-color: red;
+}
+
 .dashboard-cell {
   display: table-cell;
   padding: 10px;
