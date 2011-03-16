@@ -12,10 +12,15 @@ Dashboard = SC.Application.create( SC.StatechartManager,
 
   NAMESPACE: 'Dashboard',
   VERSION: '0.1.0',
-  
+
   rootState: SC.State.design({
     enterState: function() {
       Dashboard.mainPage.get('mainPane').append();
+      
+      if (Dashboard.FIXTURES) {
+        // only do this in debug mode
+        Dashboard.shifts.set('content', Dashboard.FIXTURES);
+      }
     }
   })
 

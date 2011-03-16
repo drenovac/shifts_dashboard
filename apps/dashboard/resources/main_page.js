@@ -2,7 +2,7 @@
 // Project:   Dashboard - mainPage
 // Copyright: ©2011 My Company, Inc.
 // ==========================================================================
-/*globals Dashboard */
+/*globals SC Dashboard */
 
 // This page describes the main user interface for your application.  
 Dashboard.mainPage = SC.Page.design({
@@ -11,13 +11,16 @@ Dashboard.mainPage = SC.Page.design({
   // Add childViews to this pane for views to display immediately on page 
   // load.
   mainPane: SC.MainPane.design({
-    childViews: 'labelView'.w(),
+    childViews: 'shifts'.w(),
     
-    labelView: SC.LabelView.design({
-      layout: { centerX: 0, centerY: 0, width: 200, height: 18 },
-      textAlign: SC.ALIGN_CENTER,
-      tagName: "h1", 
-      value: "Welcome to SproutCore!"
+    shifts: Dashboard.ScrollView.design({
+      layout: { top: 50, left: 50, right: 50, bottom: 50 },
+      
+      contentView: Dashboard.CollectionView.design({
+        contentBinding: 'Dashboard.shifts.arrangedObjects',
+        
+        exampleView: Dashboard.RowView
+      })
     })
   })
 
