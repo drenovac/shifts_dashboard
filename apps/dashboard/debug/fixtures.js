@@ -19,7 +19,7 @@ Dashboard.FIXTURES = [];
   [source] [varchar](50) NULL
 */
 (function() {
-  var now = SC.DateTime.create().toString(),
+  var now = SC.DateTime.create().toFormattedString('%H:%M'),
       idx, len;
 
   for (idx=0, len=100; idx<len; ++idx) {
