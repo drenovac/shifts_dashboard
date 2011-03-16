@@ -18,7 +18,7 @@ Dashboard.RowView = SC.View.extend( SC.ContentDisplay,
 
   // place these keys in the order you want them displayed in the rows
   // CSS class names are of the form: <key>-cell and are <spans>
-  contentDisplayProperties: 'client'.w(),
+  contentDisplayProperties: 'client roster start finish callTaken employee source'.w(),
 
   render: function(context, firstTime) {
     var content = this.get('content'),
