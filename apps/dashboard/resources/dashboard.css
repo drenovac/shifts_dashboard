@@ -1,3 +1,16 @@
 .scrollbars {
   overflow: auto;
 }
+
+.dashboard-table {
+  display: table;
+}
+
+.dashboard-row  {
+  display: table-row;
+}
+
+.dashboard-cell {
+  display: table-cell;
+  padding: 10px;
+}

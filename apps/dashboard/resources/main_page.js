@@ -17,6 +17,8 @@ Dashboard.mainPage = SC.Page.design({
       layout: { top: 50, left: 50, right: 50, bottom: 50 },
       
       contentView: Dashboard.CollectionView.design({
+        classNames: 'dashboard-table',
+        
         contentBinding: 'Dashboard.shifts.arrangedObjects',
         
         exampleView: Dashboard.RowView

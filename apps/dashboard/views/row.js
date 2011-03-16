@@ -17,7 +17,7 @@ Dashboard.RowView = SC.View.extend( SC.ContentDisplay,
   useStaticLayout: true,
 
   // place these keys in the order you want them displayed in the rows
-  // CSS class names are of the form: <key>-cell and are <spans>
+  // CSS class names are of the form: "dashboard-cell <key>" and are <spans>
   contentDisplayProperties: 'client roster start finish callTaken employee source'.w(),
 
   render: function(context, firstTime) {
@@ -28,12 +28,9 @@ Dashboard.RowView = SC.View.extend( SC.ContentDisplay,
     for (idx=0, len=keys.length; idx<len; ++idx) {
       key = keys[idx];
       context.push(
-        '<span class="', key, '-cell">', content.get(key), '</span>'
+        '<span class="dashboard-cell ', key, '">', content.get(key), '</span>'
       );
     }
-
-    // add a break after the cells
-    context.push('<br>');
   }
 
 });
