@@ -5,10 +5,7 @@
 /*globals Dashboard */
 
 /** @namespace
-
-  My cool new app.  Describe your application.
-  
-  @extends SC.Object
+  @extends SC.Application
 */
 Dashboard = SC.Application.create(
   /** @scope Dashboard.prototype */ {
