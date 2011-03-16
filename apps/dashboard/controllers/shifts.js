@@ -4,4 +4,8 @@
 // ==========================================================================
 /*globals Dashboard */
 
-Dashboard.shifts = SC.ArrayController.create();
+Dashboard.shifts = SC.ArrayController.create({
+
+  orderBy: 'status'
+
+});
