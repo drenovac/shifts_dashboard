@@ -6,6 +6,6 @@
 
 function main() {
 
-  Dashboard.mainPage.get('mainPane').append();
+  Dashboard.initStatechart();
 
 };
