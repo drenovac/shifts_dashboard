@@ -28,13 +28,27 @@ Dashboard.RowView = SC.View.extend( SC.ContentDisplay,
     for (idx=0, len=keys.length; idx<len; ++idx) {
       key = keys[idx];
       context.push(
-        '<span class="dashboard-cell ', key, '">', content.get(key), '</span>'
+        '<span class="dashboard-cell ', key, '">',
+        this.transform(key, content.get(key)),
+        '</span>'
       );
     }
     
     context.addClass(this._statusClasses[content.get('status')]);
   },
-  
-  _statusClasses: ['green', 'yellow', 'orange', 'red']
+
+  _statusClasses: ['green', 'yellow', 'orange', 'red'],
+
+  transform: function(key, value) {
+    switch (key) {
+      case 'roster':
+      case 'start':
+      case 'finish':
+      case 'callTaken':
+        return SC.DateTime.create(value).toFormattedString('%H:%M');
+      default:
+        return value;
+    }
+  }
 
 });

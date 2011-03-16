@@ -2,7 +2,7 @@
 // Project:   Dashboard - debug/fixtures
 // Copyright: ©2011 My Company, Inc.
 // ==========================================================================
-/*globals SC Dashboard */
+/*globals SC Dashboard sc_require */
 
 // This code is only available during development.
 
@@ -22,10 +22,10 @@ Dashboard.FIXTURES = [];
 */
 (function() {
   var now = [
-        SC.DateTime.create().toFormattedString('%H:%M'),
-        SC.DateTime.create().adjust({ minute: 16 }).toFormattedString('%H:%M'),
-        SC.DateTime.create().adjust({ minute: 31 }).toFormattedString('%H:%M'),
-        SC.DateTime.create().adjust({ minute: 61 }).toFormattedString('%H:%M')
+        SC.DateTime.create()._ms,
+        SC.DateTime.create()._ms + FIFTEEN_MINUTES + 1,
+        SC.DateTime.create()._ms + THIRTY_MINUTES + 1,
+        SC.DateTime.create()._ms + ONE_HOUR + 1
       ],
       idx, len;
 
@@ -37,8 +37,8 @@ Dashboard.FIXTURES = [];
       finish: now[0],
       callTaken: now[idx % 4],
       employee: 'Employee ' + idx * 2,
-      source: 'Source ' + idx % 2,
-      status: idx % 4
+      source: 'Source ' + idx % 2
+      // status: idx % 4
     }));
   }
   

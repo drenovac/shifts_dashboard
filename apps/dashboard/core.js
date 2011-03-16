@@ -13,6 +13,8 @@ Dashboard = SC.Application.create( SC.StatechartManager,
   NAMESPACE: 'Dashboard',
   VERSION: '0.1.0',
 
+  updatedAt: SC.DateTime.create()._ms,
+
   rootState: SC.State.design({
     enterState: function() {
       Dashboard.mainPage.get('mainPane').append();
