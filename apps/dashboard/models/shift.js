@@ -17,14 +17,12 @@ Dashboard.Shift = SC.Object.extend(
   /** @scope Dashboard.Shift.prototype */ {
 
   status: function() {
-    var updatedAt = Dashboard.get('updatedAt'),
-        callTaken = this.get('callTaken'),
-        distance = callTaken - updatedAt;
+    var age = this.get('callTaken') - Dashboard.get('updatedAt');
 
-    if (distance < FIFTEEN_MINUTES ) return 3;
-    else if (distance > FIFTEEN_MINUTES && distance < TWENTY_FIVE_MINUTES) return 2;
-    else if (distance > TWENTY_FIVE_MINUTES && distance < THIRTY_MINUTES) return 1;
-    else return 0;
+    if      (age < FIFTEEN_MINUTES )                             return 3;
+    else if (age > FIFTEEN_MINUTES && age < TWENTY_FIVE_MINUTES) return 2;
+    else if (age > TWENTY_FIVE_MINUTES && age < THIRTY_MINUTES)  return 1;
+    else                                                         return 0;
   }.property('callTaken').cacheable()
 
 });
