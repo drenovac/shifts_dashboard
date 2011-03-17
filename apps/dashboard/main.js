@@ -6,6 +6,7 @@
 
 function main() {
 
+  document.title = "Shifts Dashboard";
   Dashboard.initStatechart();
 
 };
