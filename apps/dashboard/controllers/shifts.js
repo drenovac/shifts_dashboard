@@ -2,7 +2,7 @@
 // Project:   Dashboard - controllers/shifts
 // Copyright: ©2011 My Company, Inc.
 // ==========================================================================
-/*globals Dashboard */
+/*globals SC Dashboard */
 
 Dashboard.shifts = SC.ArrayController.create({
 

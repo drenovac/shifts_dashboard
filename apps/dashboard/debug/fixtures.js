@@ -24,8 +24,8 @@ Dashboard.FIXTURES = [];
   var now = [
         SC.DateTime.create()._ms,
         SC.DateTime.create()._ms + FIFTEEN_MINUTES + 1,
-        SC.DateTime.create()._ms + THIRTY_MINUTES + 1,
-        SC.DateTime.create()._ms + ONE_HOUR + 1
+        SC.DateTime.create()._ms + TWENTY_FIVE_MINUTES + 1,
+        SC.DateTime.create()._ms + THIRTY_MINUTES + 1
       ],
       idx, len;
 
