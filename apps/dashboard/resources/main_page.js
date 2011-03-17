@@ -11,18 +11,27 @@ Dashboard.mainPage = SC.Page.design({
   // Add childViews to this pane for views to display immediately on page 
   // load.
   mainPane: SC.MainPane.design({
-    childViews: 'shifts'.w(),
-    
+    childViews: 'shifts updated'.w(),
+
     shifts: Dashboard.ScrollView.design({
-      layout: { top: 50, left: 50, right: 50, bottom: 50 },
-      
+      layout: { top: 80, left: 10, right: 10, bottom: 40 },
+      classNames: 'borders',
+
       contentView: Dashboard.CollectionView.design({
         classNames: 'dashboard-table',
-        
+
         contentBinding: 'Dashboard.shifts.arrangedObjects',
-        
+
         exampleView: Dashboard.RowView
       })
+    }),
+
+    updated: SC.LabelView.design({
+      layout: { left: 20, bottom: 10, height: 20, right: 20 },
+
+      valueBinding: SC.Binding.transform(function (value, binding) {
+        return "Grid updated at: " + SC.DateTime.create(value).toString();
+      }).from('Dashboard.updatedAt')
     })
   })
 

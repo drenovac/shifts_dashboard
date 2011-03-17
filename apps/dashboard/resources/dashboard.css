@@ -29,10 +29,15 @@
 
 .dashboard-cell {
   display: table-cell;
-  padding: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
   border-bottom: 1px solid black;
 }
 
 .dashboard-cell.client {
   min-width: 250px;
+}
+
+.borders {
+  border: 1px solid black;
 }
