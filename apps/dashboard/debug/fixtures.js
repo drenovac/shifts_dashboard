@@ -38,7 +38,6 @@ Dashboard.FIXTURES = [];
       callTaken: now[idx % 4],
       employee: 'Employee ' + idx * 2,
       source: 'Source ' + idx % 2
-      // status: idx % 4
     }));
   }
   
