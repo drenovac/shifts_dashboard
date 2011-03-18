@@ -7,6 +7,12 @@
   width: 100%;
 }
 
+.dashboard-header-group {
+  display: table-header-group;
+  background-color: white;
+  font-weight: bold;
+}
+
 .dashboard-row  {
   display: table-row;
 }

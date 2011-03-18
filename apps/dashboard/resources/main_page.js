@@ -22,7 +22,29 @@ Dashboard.mainPage = SC.Page.design({
 
         contentBinding: 'Dashboard.shifts.arrangedObjects',
 
-        exampleView: Dashboard.RowView
+        exampleView: Dashboard.RowView,
+
+        render: function(context, firstTime) {
+          if (firstTime) {
+            var keys = Dashboard.RowView.prototype.contentDisplayProperties,
+                idx, len, key;
+
+            context.push(
+              '<div class="dashboard-header-group">',
+              '<div class="dashboard-row">'
+            );
+            for (idx=0, len=keys.length; idx<len; ++idx) {
+              key = keys[idx];
+              context.push(
+                '<span class="dashboard-cell">', key.replace(SC.STRING_DECAMELIZE_REGEXP,'$1 $2').capitalize(), '</span>'
+              );
+            }
+            context.push('</div></div>');
+            sc_super();
+          } else {
+            sc_super();
+          }
+        }
       })
     }),
 
