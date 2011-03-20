@@ -26,8 +26,10 @@ Dashboard.mainPage = SC.Page.design({
 
         render: function(context, firstTime) {
           if (firstTime) {
-            var keys = Dashboard.RowView.prototype.contentDisplayProperties,
+            var keys = Dashboard.RowView.prototype.contentDisplayProperties.copy(),
                 idx, len, key;
+
+            keys.unshift('#'); // contentIndex
 
             context.push(
               '<div class="dashboard-header-group">',

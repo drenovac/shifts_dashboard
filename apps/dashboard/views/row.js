@@ -18,13 +18,18 @@ Dashboard.RowView = SC.View.extend( SC.ContentDisplay,
 
   // place these keys in the order you want them displayed in the rows
   // CSS class names are of the form: "dashboard-cell <key>" and are <spans>
-  contentDisplayProperties: 'client roster start finish callTaken employee source'.w(),
+  contentDisplayProperties: 'date due callTaken employee client shift'.w(),
 
   render: function(context, firstTime) {
     var content = this.get('content'),
         keys = this.get('contentDisplayProperties'),
         idx, len, key;
 
+    context.push(
+      '<span class="dashboard-cell idx">',
+      this.get('contentIndex') + 1, // 1-based
+      '</span>'
+    )
     for (idx=0, len=keys.length; idx<len; ++idx) {
       key = keys[idx];
       context.push(
@@ -41,9 +46,8 @@ Dashboard.RowView = SC.View.extend( SC.ContentDisplay,
 
   transform: function(key, value) {
     switch (key) {
-      case 'start':
-      case 'finish':
-        return value.slice(0,-8);
+      case 'due':
+        return value.slice(0,-11);
       case 'callTaken':
         return SC.DateTime.create(value).toFormattedString('%H:%M');
       default:

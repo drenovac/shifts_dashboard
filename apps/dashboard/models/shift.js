@@ -2,16 +2,16 @@
 // Project:   Dashboard - models/shift
 // Copyright: ©2011 My Company, Inc.
 // ==========================================================================
-/*globals Dashboard */
+/*globals SC Dashboard */
 
 /** @class
 
   @extends SC.Object
 */
 
-FIFTEEN_MINUTES     = 15*60*1000;
-TWENTY_FIVE_MINUTES = 25*60*1000;
-THIRTY_MINUTES      = 30*60*1000;
+var FIFTEEN_MINUTES     = 15*60*1000;
+var TWENTY_FIVE_MINUTES = 25*60*1000;
+var THIRTY_MINUTES      = 30*60*1000;
 
 Dashboard.Shift = SC.Object.extend(
   /** @scope Dashboard.Shift.prototype */ {
@@ -27,7 +27,7 @@ Dashboard.Shift = SC.Object.extend(
     else                                                         return 0;
   }.property('callTaken').cacheable(),
 
-  roster: function(key, value) {
+  date: function(key, value) {
     return this.roster_date;
   }.property().cacheable(),
 
@@ -37,12 +37,16 @@ Dashboard.Shift = SC.Object.extend(
     return SC.DateTime.parse(dateTime, '%Y-%m-%d %H:%M:%S.%s')._ms;
   }.property().cacheable(),
 
-  start: function(key, value) {
+  due: function(key, value) {
     return this.start_time;
   }.property().cacheable(),
 
   finish: function(key, value) {
     return this.finish_time;
+  }.property().cacheable(),
+  
+  shift: function(key, value) {
+    return this.start_time.slice(0,-11)+'-'+this.finish_time.slice(0,-11);
   }.property().cacheable()
 
 });
