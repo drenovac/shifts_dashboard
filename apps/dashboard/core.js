@@ -13,7 +13,7 @@ Dashboard = SC.Application.create(
   NAMESPACE: 'Dashboard',
   VERSION: '0.1.0',
 
-  updatedAt: SC.DateTime.create()._ms,
+  updatedAt: null,
 
   statechart: Ki.Statechart.create({
     rootState: Ki.State.design({
