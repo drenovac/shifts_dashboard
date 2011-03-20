@@ -67,7 +67,7 @@ Dashboard.mainPage = SC.Page.design({
     }),
 
     updated: SC.LabelView.design({
-      layout: { left: 20, bottom: 10, height: 20, right: 20 },
+      layout: { left: 160, bottom: 10, height: 20, right: 20 },
 
       valueBinding: SC.Binding.transform(function (value, binding) {
         return "Grid updated at: " + SC.DateTime.create(value).toFormattedString('%H:%M:%S');

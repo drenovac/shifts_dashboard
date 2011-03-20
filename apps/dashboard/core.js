@@ -31,12 +31,14 @@ Dashboard = SC.Application.create(
           SC.Object.create({ name: 'COMPANY-3' })
         ]);
 
-        SC.Request.getUrl('/api/v1')
-          .notify(this, function (request) {
-            Dashboard.statechart.invokeStateMethod('response', request);
-          })
-          .set('isJSON', true)
-          .send() ;
+        Dashboard._timer = SC.Timer.schedule({
+          target: Dashboard,
+          action: 'requestShifts',
+          interval: 30000, // 30 seconds
+          repeats: true
+        });
+
+        Dashboard.requestShifts();
       },
 
       response: function(request) {
@@ -60,7 +62,7 @@ Dashboard = SC.Application.create(
       changeSource: function(sender) {
         var name = sender.get('selection').firstObject().get('name'),
              ary;
-        Dashboard.set('source', name)
+        Dashboard.set('source', name);
         ary = Dashboard.computeFilteredShifts(Dashboard._shifts);
         Dashboard.shifts.set('content', ary);
       }
@@ -82,6 +84,16 @@ Dashboard = SC.Application.create(
     }
 
     return ary;
+  },
+  
+  requestShifts: function() {
+    console.log('requesting shifts');
+    SC.Request.getUrl('/api/v1')
+      .notify(this, function (request) {
+        Dashboard.statechart.invokeStateMethod('response', request);
+      })
+      .set('isJSON', true)
+      .send() ;
   }
 
 });
