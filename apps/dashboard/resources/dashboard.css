@@ -64,3 +64,9 @@
 .source.sel {
   background-color: 'blue';
 }
+
+#title {
+  font-size: 26px;
+  font-weight: bold !important;
+  line-height: 26px !important;
+}

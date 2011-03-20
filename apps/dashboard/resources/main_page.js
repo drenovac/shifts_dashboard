@@ -11,10 +11,17 @@ Dashboard.mainPage = SC.Page.design({
   // Add childViews to this pane for views to display immediately on page 
   // load.
   mainPane: SC.MainPane.design({
-    childViews: 'sources shifts updated'.w(),
+    childViews: 'appTitle sources shifts updated refresh'.w(),
+
+    appTitle: SC.LabelView.design({
+      layout: { top: 30, left: 160, height: 30 },
+      tagName: 'div',
+      layerId: 'title',
+      value: 'Shifts Dashboard'
+    }),
 
     sources: Dashboard.ScrollView.design({
-      layout: { top: 80, width: 130, left: 10, bottom: 40 },
+      layout: { top: 60, width: 130, left: 10, bottom: 30 },
 
       contentView: Dashboard.CollectionView.design({
         tagName: 'ul',
@@ -31,7 +38,7 @@ Dashboard.mainPage = SC.Page.design({
     }),
 
     shifts: Dashboard.ScrollView.design({
-      layout: { top: 80, left: 150, right: 10, bottom: 40 },
+      layout: { top: 60, left: 150, right: 10, bottom: 30 },
       classNames: 'borders',
 
       contentView: Dashboard.CollectionView.design({
@@ -68,13 +75,21 @@ Dashboard.mainPage = SC.Page.design({
     }),
 
     updated: SC.LabelView.design({
-      layout: { left: 160, bottom: 10, height: 20, right: 20 },
+      layout: { left: 160, bottom: 5, height: 20, right: 20 },
 
       valueBinding: SC.Binding.transform(function (value, binding) {
         return (value)
           ? "Grid updated at: " + SC.DateTime.create(value).toFormattedString('%H:%M:%S')
           : "Fetching data for grid..." ;
       }).from('Dashboard.updatedAt')
+    }),
+
+    refresh: SC.ButtonView.design({
+      layout: { width: 80, top: 30, height: 23, right: 10 },
+
+      title: "Refresh",
+      action: 'requestShifts',
+      target: Dashboard
     })
   })
 
