@@ -17,12 +17,32 @@ Dashboard.Shift = SC.Object.extend(
   /** @scope Dashboard.Shift.prototype */ {
 
   status: function() {
-    var age = this.get('callTaken') - Dashboard.get('updatedAt');
+    var age = Dashboard.get('updatedAt') - this.get('callTaken');
+
+    // console.log(age)
 
     if      (age < FIFTEEN_MINUTES )                             return 3;
     else if (age > FIFTEEN_MINUTES && age < TWENTY_FIVE_MINUTES) return 2;
     else if (age > TWENTY_FIVE_MINUTES && age < THIRTY_MINUTES)  return 1;
     else                                                         return 0;
-  }.property('callTaken').cacheable()
+  }.property('callTaken').cacheable(),
+
+  roster: function(key, value) {
+    return this.roster_date;
+  }.property().cacheable(),
+
+  callTaken: function(key, value) {
+    var dateTime = this.call_taken_date+' '+this.call_taken_time;
+    // console.log(dateTime);
+    return SC.DateTime.parse(dateTime, '%Y-%m-%d %H:%M:%S.%s')._ms;
+  }.property().cacheable(),
+
+  start: function(key, value) {
+    return this.start_time;
+  }.property().cacheable(),
+
+  finish: function(key, value) {
+    return this.finish_time;
+  }.property().cacheable()
 
 });

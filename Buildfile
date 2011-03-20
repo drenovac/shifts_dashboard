@@ -4,4 +4,6 @@
 # ===========================================================================
 
 # Add initial buildfile information here
-config :all, :required => [:sproutcore, :'sproutcore/statechart']
+config :all, :required => [:sproutcore, :ki]
+
+proxy '/api', :to => 'localhost:4567'

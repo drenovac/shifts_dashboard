@@ -41,9 +41,9 @@ Dashboard.RowView = SC.View.extend( SC.ContentDisplay,
 
   transform: function(key, value) {
     switch (key) {
-      case 'roster':
-      case 'start':
-      case 'finish':
+      // case 'roster':
+      // case 'start':
+      // case 'finish':
       case 'callTaken':
         return SC.DateTime.create(value).toFormattedString('%H:%M');
       default:

@@ -6,6 +6,6 @@
 
 Dashboard.shifts = SC.ArrayController.create({
 
-  orderBy: 'status'
+  orderBy: 'status, roster'
 
 });
