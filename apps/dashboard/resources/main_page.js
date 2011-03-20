@@ -14,10 +14,11 @@ Dashboard.mainPage = SC.Page.design({
     childViews: 'sources shifts updated'.w(),
 
     sources: Dashboard.ScrollView.design({
-      layout: { top: 80, width: 140, left: 10, bottom: 40 },
+      layout: { top: 80, width: 130, left: 10, bottom: 40 },
 
       contentView: Dashboard.CollectionView.design({
         tagName: 'ul',
+        layerId: 'sources',
 
         contentBinding: 'Dashboard.sources.arrangedObjects',
         

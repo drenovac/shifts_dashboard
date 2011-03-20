@@ -48,6 +48,10 @@
   border: 1px solid black;
 }
 
+#sources {
+  margin: 0px;
+}
+
 .source.sel {
   background-color: 'blue';
 }
