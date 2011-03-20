@@ -76,6 +76,8 @@ Dashboard = SC.Application.create(
     var source = this.get('source'),
         idx, len, obj, ary = [];
 
+    if (!source) return shifts;
+
     for (idx=0, len=shifts.length; idx<len; ++idx) {
       obj = shifts[idx];
       if (obj.get('source') === source) {

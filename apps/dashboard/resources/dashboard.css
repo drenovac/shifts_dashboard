@@ -50,6 +50,15 @@
 
 #sources {
   margin: 0px;
+  background-color: white;
+  border-top: 1px solid gray;
+  border-left: 1px solid gray;
+  border-right: 1px solid gray;
+}
+
+#sources > li {
+  padding: 10px;
+  border-bottom: 1px solid gray;
 }
 
 .source.sel {
