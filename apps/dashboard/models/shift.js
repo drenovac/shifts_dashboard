@@ -28,7 +28,8 @@ Dashboard.Shift = SC.Object.extend(
   }.property('callTaken').cacheable(),
 
   date: function(key, value) {
-    return this.roster_date;
+    var date = this.roster_date.split('-');
+    return [date[2], date[1], date[0].slice(2)].join('/');
   }.property().cacheable(),
 
   callTaken: function(key, value) {
