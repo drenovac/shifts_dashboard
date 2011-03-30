@@ -22,7 +22,9 @@ Dashboard = SC.Application.create(
 
         // if (Dashboard.FIXTURES) {
         //   // only do this in debug mode
-        //   Dashboard.shifts.set('content', Dashboard.FIXTURES);
+        //   var ary = Dashboard._shifts = Dashboard.FIXTURES;
+        //   ary = Dashboard.computeFilteredShifts(ary);
+        //   Dashboard.shifts.set('content', ary);
         // }
 
         Dashboard.sources.set('content', [
@@ -60,9 +62,11 @@ Dashboard = SC.Application.create(
       },
 
       changeSource: function(sender) {
-        var name = sender.get('selection').firstObject().get('name'),
-             ary;
-        Dashboard.set('source', name);
+        var sel = Dashboard.sources.get('selection'),
+            names = sel ? sel.getEach('name') : [],
+            ary ;
+
+        Dashboard.set('names', names);
         ary = Dashboard.computeFilteredShifts(Dashboard._shifts);
         Dashboard.shifts.set('content', ary);
       }
@@ -73,23 +77,25 @@ Dashboard = SC.Application.create(
   _shifts: [],
 
   computeFilteredShifts: function(shifts) {
-    var source = this.get('source'),
+    var names = this.get('names'),
         idx, len, obj, ary = [];
 
-    if (!source) return shifts;
+    if (names.length === 0) return shifts;
 
     for (idx=0, len=shifts.length; idx<len; ++idx) {
       obj = shifts[idx];
-      if (obj.get('source') === source) {
+      if (names.indexOf(obj.get('source')) !== -1) {
         ary.push(obj);
       }
     }
 
     return ary;
   },
-  
+
+  names: [], // default to "all names"
+
   requestShifts: function() {
-    console.log('requesting shifts');
+    // console.log('requesting shifts');
     SC.Request.getUrl('/api/v1')
       .notify(200, this, function (request) {
         Dashboard.statechart.invokeStateMethod('response', request);

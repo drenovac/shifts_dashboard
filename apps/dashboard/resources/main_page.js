@@ -28,10 +28,19 @@ Dashboard.mainPage = SC.Page.design({
         layerId: 'sources',
 
         contentBinding: 'Dashboard.sources.arrangedObjects',
-        
-        actOnSelect: true,
-        action: 'changeSource',
-        target: Dashboard.statechart,
+        selectionBinding: 'Dashboard.sources.selection',
+
+        useToggleSelection: true,
+
+        // Kind of a hack, but the new selection isn't actually available
+        // until after mouseUp is called, so assume that every mouseUp is
+        // somehow changing the selection.
+        mouseUp: function (evt) {
+          this.invokeLater(function() {
+            Dashboard.statechart.invokeStateMethod('changeSource');
+          },0);
+          return sc_super();
+        },
 
         exampleView: Dashboard.SourceView
       })
