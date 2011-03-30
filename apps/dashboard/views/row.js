@@ -42,7 +42,7 @@ Dashboard.RowView = SC.View.extend( SC.ContentDisplay,
     context.addClass(this._statusClasses[content.get('status')]);
   },
 
-  _statusClasses: ['red', 'orange', 'yellow', 'green'],
+  _statusClasses: ['red', 'yellow', 'green'],
 
   transform: function(key, value) {
     switch (key) {

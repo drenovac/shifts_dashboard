@@ -24,7 +24,6 @@ Dashboard.FIXTURES = [];
   var now = [
         SC.DateTime.create()._ms,
         SC.DateTime.create()._ms + FIFTEEN_MINUTES + 1,
-        SC.DateTime.create()._ms + TWENTY_FIVE_MINUTES + 1,
         SC.DateTime.create()._ms + THIRTY_MINUTES + 1
       ],
       idx, len;
@@ -35,7 +34,7 @@ Dashboard.FIXTURES = [];
       roster: now[0],
       start: now[0],
       finish: now[0],
-      callTaken: now[idx % 4],
+      callTaken: now[idx % 3],
       employee: 'Employee ' + idx * 2,
       source: 'Source ' + idx % 2
     }));

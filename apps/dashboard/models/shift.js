@@ -10,7 +10,6 @@
 */
 
 var FIFTEEN_MINUTES     = 15*60*1000;
-var TWENTY_FIVE_MINUTES = 25*60*1000;
 var THIRTY_MINUTES      = 30*60*1000;
 
 Dashboard.Shift = SC.Object.extend(
@@ -21,10 +20,9 @@ Dashboard.Shift = SC.Object.extend(
 
     // console.log(age)
 
-    if      (age < FIFTEEN_MINUTES )                             return 3;
-    else if (age > FIFTEEN_MINUTES && age < TWENTY_FIVE_MINUTES) return 2;
-    else if (age > TWENTY_FIVE_MINUTES && age < THIRTY_MINUTES)  return 1;
-    else                                                         return 0;
+    if      (age < FIFTEEN_MINUTES )                        return 2;
+    else if (age > FIFTEEN_MINUTES && age < THIRTY_MINUTES) return 1;
+    else                                                    return 0;
   }.property('callTaken').cacheable(),
 
   date: function(key, value) {
