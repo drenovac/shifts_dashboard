@@ -31,7 +31,7 @@ Dashboard.Shift = SC.Object.extend(
   }.property().cacheable(),
 
   callTaken: function(key, value) {
-    var dateTime = this.call_taken_date+' '+this.call_taken_time.slice(0,-8)+'Z';
+    var dateTime = this.call_taken_date+' '+this.call_taken_time.slice(0,-8)+'+10:00';
     // console.log(dateTime);
     return SC.DateTime.parse(dateTime, '%Y-%m-%d %H:%M:%S%Z')._ms;
   }.property().cacheable(),

@@ -29,7 +29,7 @@ Dashboard.RowView = SC.View.extend( SC.ContentDisplay,
       '<span class="dashboard-cell idx">',
       this.get('contentIndex') + 1, // 1-based
       '</span>'
-    )
+    );
     for (idx=0, len=keys.length; idx<len; ++idx) {
       key = keys[idx];
       context.push(
@@ -49,7 +49,9 @@ Dashboard.RowView = SC.View.extend( SC.ContentDisplay,
       case 'due':
         return value.slice(0,-11);
       case 'callTaken':
-        return SC.DateTime.create(value).toFormattedString('%H:%M');
+        return SC.DateTime.create(value)
+            .adjust({ timezone: -600 })
+            .toFormattedString('%H:%M');
       default:
         return value;
     }
