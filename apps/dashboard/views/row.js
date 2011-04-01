@@ -51,7 +51,7 @@ Dashboard.RowView = SC.View.extend( SC.ContentDisplay,
       case 'callTaken':
         return SC.DateTime.create(value)
             .adjust({ timezone: -600 })
-            .toFormattedString('%H:%M');
+            .toFormattedString('%H:%M') + ' ('+value+')';
       default:
         return value;
     }
