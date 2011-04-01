@@ -8,6 +8,6 @@ sc_require('controllers/sources');
 
 Dashboard.shifts = SC.ArrayController.create({
 
-  orderBy: ['roster_date', 'status']
+  orderBy: ['status', 'roster_date']
 
 });
