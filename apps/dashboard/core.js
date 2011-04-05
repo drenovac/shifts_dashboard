@@ -47,7 +47,7 @@ Dashboard = SC.Application.create(
         var json = request.get('response'),
             idx, len, hash, ary = [];
 
-        // console.log(json);
+        // console.log(JSON.stringify(json));
 
         for (idx=0, len=json.length; idx<len; ++idx) {
           hash = json[idx];

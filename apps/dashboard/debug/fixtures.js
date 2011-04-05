@@ -20,6 +20,58 @@ Dashboard.FIXTURES = [];
   [employee] [varchar](50) NULL,
   [source] [varchar](50) NULL
 */
+/*
+  Example JSON receieved from the server:
+
+    [{
+        "client": "224",
+        "client_name": "Client 224 name",
+        "roster_date": "2011-04-04",
+        "start_time": "09:00:00.0000000",
+        "finish_time": "15:30:00.0000000",
+        "call_taken_date": "2011-04-04",
+        "call_taken_time": "13:20:00.0000000",
+        "employee": "666a",
+        "employee_name": "Operator 1",
+        "source": "EDHEALQLD"
+    },
+    {
+        "client": "224",
+        "client_name": "Client 224 name",
+        "roster_date": "2011-04-04",
+        "start_time": "09:00:00.0000000",
+        "finish_time": "15:30:00.0000000",
+        "call_taken_date": "2011-04-05",
+        "call_taken_time": "13:20:00.0000000",
+        "employee": "666a",
+        "employee_name": "Operator 1",
+        "source": "EDHEALQLD"
+    },
+    {
+        "client": "224",
+        "client_name": "Client 224 name",
+        "roster_date": "2011-04-04",
+        "start_time": "09:00:00.0000000",
+        "finish_time": "15:30:00.0000000",
+        "call_taken_date": "2011-04-06",
+        "call_taken_time": "13:20:00.0000000",
+        "employee": "666b",
+        "employee_name": "Operator 1",
+        "source": "EDHEALQLD"
+    },
+    {
+        "client": "225",
+        "client_name": "Client 225 name",
+        "roster_date": "2011-04-04",
+        "start_time": "09:00:00.0000000",
+        "finish_time": "15:30:00.0000000",
+        "call_taken_date": "2011-04-04",
+        "call_taken_time": "14:06:00.0000000",
+        "employee": "fred",
+        "employee_name": "Operator 1",
+        "source": "EDHEALQLD"
+    }]
+*/
 (function() {
   var now = [
         SC.DateTime.create()._ms,

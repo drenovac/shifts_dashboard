@@ -20,6 +20,16 @@ Dashboard.RowView = SC.View.extend( SC.ContentDisplay,
   // CSS class names are of the form: "dashboard-cell <key>" and are <spans>
   contentDisplayProperties: 'date due callTaken employee client shift'.w(),
 
+  // rows should be (in order):
+  // - Call taken date
+  // - call taken time
+  // - client
+  // - client_name
+  // - roster_date
+  // - start_time
+  // - finish_time
+  // - employee
+  // - employee_name
   render: function(context, firstTime) {
     var content = this.get('content'),
         keys = this.get('contentDisplayProperties'),
