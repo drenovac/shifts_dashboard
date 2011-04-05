@@ -28,9 +28,9 @@ Dashboard = SC.Application.create(
         // }
 
         Dashboard.sources.set('content', [
-          SC.Object.create({ name: 'SOURCE' }),
-          SC.Object.create({ name: 'COMPANY-2' }),
-          SC.Object.create({ name: 'COMPANY-3' })
+          SC.Object.create({ name: 'EDHEAL/VIC', sources: ['EDHEAL', 'EDHEALVIC'] }),
+          SC.Object.create({ name: 'EDHEALQLD', sources: ['EDHEALQLD'] }),
+          SC.Object.create({ name: 'ALL', sources: [] }) // implies "all"
         ]);
 
         Dashboard._timer = SC.Timer.schedule({
@@ -63,7 +63,8 @@ Dashboard = SC.Application.create(
 
       changeSource: function(sender) {
         var sel = Dashboard.sources.get('selection'),
-            names = sel ? sel.getEach('name') : [],
+            selectedObject = sel ? sel.firstObject() : null,
+            names = selectedObject ? selectedObject.get('sources') : [],
             ary ;
 
         Dashboard.set('names', names);
