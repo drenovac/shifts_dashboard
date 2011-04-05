@@ -18,7 +18,7 @@ Dashboard.RowView = SC.View.extend( SC.ContentDisplay,
 
   // place these keys in the order you want them displayed in the rows
   // CSS class names are of the form: "dashboard-cell <key>" and are <spans>
-  contentDisplayProperties: 'date due callTaken employee client shift'.w(),
+  contentDisplayProperties: 'date callTaken client clientName rosterDate shift employee employeeName'.w(),
 
   // rows should be (in order):
   // - Call taken date

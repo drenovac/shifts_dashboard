@@ -40,10 +40,6 @@
   border-bottom: 1px solid black;
 }
 
-.dashboard-cell.client {
-  min-width: 250px;
-}
-
 .borders {
   border: 1px solid black;
 }

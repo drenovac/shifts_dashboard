@@ -36,12 +36,25 @@ Dashboard.Shift = SC.Object.extend(
     return SC.DateTime.parse(dateTime, '%Y-%m-%d %H:%M:%S%Z')._ms;
   }.property().cacheable(),
 
+  clientName: function(key, value) {
+      return this.client_name;
+  }.property().cacheable(),
+
   due: function(key, value) {
     return this.start_time;
   }.property().cacheable(),
 
+  employeeName: function(key, value) {
+      return this.employee_name;
+  }.property().cacheable(),
+
   finish: function(key, value) {
     return this.finish_time;
+  }.property().cacheable(),
+  
+  rosterDate: function(key, value) {
+      var date = this.roster_date.split('-');
+      return [date[2], date[1], date[0].slice(2)].join('/');
   }.property().cacheable(),
   
   shift: function(key, value) {
