@@ -9,6 +9,6 @@ Dashboard.sources = SC.ArrayController.create({
   orderBy: 'name',
 
   allowsEmptySelection: false,
-  allowsMultipleSelection: false,
+  allowsMultipleSelection: false
   
 });

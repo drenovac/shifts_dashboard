@@ -9,4 +9,4 @@ function main() {
   document.title = "Shifts Dashboard";
   Dashboard.statechart.initStatechart();
 
-};
+}
