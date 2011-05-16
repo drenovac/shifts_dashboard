@@ -18,6 +18,20 @@ Dashboard.SourceView = SC.View.extend( SC.ContentDisplay,
   
   displayProperties: 'isSelected',
 
+  // isContextMenuEnabled: NO,
+  // 
+  // contextMenu: function(evt) {
+  //   var menuItems = [
+  //     { title: 'Updated Client', target: Dashboard.statechart, action: 'updatedClient' }
+  //   ];
+  // 
+  //   var menu = SC.MenuPane.create({
+  //     layout: { width: 150 },
+  //     items: menuItems
+  //   }).popup(this);
+  //   return sc_super();
+  // },
+
   render: function(context, firstTime) {
     var content = this.get('content');
 

@@ -44,6 +44,10 @@ Dashboard = SC.Application.create(
         Dashboard.requestShifts();
       },
 
+      updatedClient: function(sender) {
+        alert('updatedClient called');
+      },
+
       response: function(request) {
         var json = request.get('response'),
             idx, len, hash, ary = [];

@@ -16,14 +16,23 @@ Dashboard.Shift = SC.Object.extend(
   /** @scope Dashboard.Shift.prototype */ {
 
   status: function() {
-    var age = Dashboard.get('updatedAt') - this.get('callTaken');
+    var age, updatedAt = this.get('updatedAt');
+
+    if (updatedAt) {
+      age = Dashboard.get('updatedAt') - updatedAt;
+    } else {
+      age = Dashboard.get('updatedAt') - this.get('callTaken');
+    }
 
     // console.log(age)
 
-    if      (age < FIFTEEN_MINUTES )                        return 2;
-    else if (age > FIFTEEN_MINUTES && age < THIRTY_MINUTES) return 1;
-    else                                                    return 0;
+    if (age < THIRTY_MINUTES) return 1;
+    else                      return 0;
   }.property('callTaken').cacheable(),
+
+  updatedAt: function() {
+    return 0; // FIXME: What is this property?
+  }.property(),
 
   date: function(key, value) {
     var date = this.call_taken_date.split('-');
