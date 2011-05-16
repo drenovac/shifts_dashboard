@@ -39,7 +39,7 @@ Dashboard.Shift = SC.Object.extend(
   timeEntered: function() {
     return SC.DateTime.create(this.get('callTaken'))
         .adjust({ timezone: -600 })
-        .toFormattedString('%H:%M') + ' ('+value+')';
+        .toFormattedString('%H:%M') + ' ('+this.get('callTaken')+')';
   }.property('callTaken').cacheable(),
 
   dateAndTimeEntered: function() {
@@ -48,6 +48,10 @@ Dashboard.Shift = SC.Object.extend(
 
   clientName: function(key, value) {
       return this.client_name;
+  }.property().cacheable(),
+
+  siteName: function(key, value) {
+      return this.client_name; // FIXME: Should this be something else?
   }.property().cacheable(),
 
   due: function(key, value) {
