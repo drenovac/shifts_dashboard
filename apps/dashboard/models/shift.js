@@ -71,7 +71,7 @@ Dashboard.Shift = SC.Object.extend(
       return [date[2], date[1], date[0].slice(2)].join('/');
   }.property().cacheable(),
   
-  shift: function(key, value) {
+  shiftTime: function(key, value) {
     return this.start_time.slice(0,-11)+'-'+this.finish_time.slice(0,-11);
   }.property().cacheable()
 
