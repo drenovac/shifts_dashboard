@@ -66,7 +66,7 @@ Dashboard.Shift = SC.Object.extend(
     return this.finish_time;
   }.property().cacheable(),
   
-  rosterDate: function(key, value) {
+  shiftDate: function(key, value) {
       var date = this.roster_date.split('-');
       return [date[2], date[1], date[0].slice(2)].join('/');
   }.property().cacheable(),
