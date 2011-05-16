@@ -18,11 +18,10 @@ Dashboard.RowView = SC.View.extend( SC.ContentDisplay,
 
   // place these keys in the order you want them displayed in the rows
   // CSS class names are of the form: "dashboard-cell <key>" and are <spans>
-  contentDisplayProperties: 'date callTaken client clientName rosterDate shift employee employeeName'.w(),
+  contentDisplayProperties: 'dateAndTimeEntered client clientName rosterDate shift employee employeeName'.w(),
 
   // rows should be (in order):
-  // - Call taken date
-  // - call taken time
+  // - Date and Time entered
   // - client
   // - client_name
   // - roster_date
@@ -58,10 +57,6 @@ Dashboard.RowView = SC.View.extend( SC.ContentDisplay,
     switch (key) {
       case 'due':
         return value.slice(0,-11);
-      case 'callTaken':
-        return SC.DateTime.create(value)
-            .adjust({ timezone: -600 })
-            .toFormattedString('%H:%M') + ' ('+value+')';
       default:
         return value;
     }

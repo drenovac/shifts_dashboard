@@ -70,6 +70,7 @@ Dashboard.mainPage = SC.Page.design({
             );
             for (idx=0, len=keys.length; idx<len; ++idx) {
               key = keys[idx];
+              if (key === 'dateAndTimeEntered') key = "Date & Time Entered"; // HACK
               context.push(
                 '<span class="dashboard-cell">', key.replace(SC.STRING_DECAMELIZE_REGEXP,'$1 $2').capitalize(), '</span>'
               );

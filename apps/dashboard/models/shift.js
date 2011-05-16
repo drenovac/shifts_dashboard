@@ -36,6 +36,16 @@ Dashboard.Shift = SC.Object.extend(
     return SC.DateTime.parse(dateTime, '%Y-%m-%d %H:%M:%S%Z')._ms;
   }.property().cacheable(),
 
+  timeEntered: function() {
+    return SC.DateTime.create(this.get('callTaken'))
+        .adjust({ timezone: -600 })
+        .toFormattedString('%H:%M') + ' ('+value+')';
+  }.property('callTaken').cacheable(),
+
+  dateAndTimeEntered: function() {
+    return this.getEach('date', 'timeEntered').join(' - ');
+  }.property('date', 'timeEntered').cacheable(),
+
   clientName: function(key, value) {
       return this.client_name;
   }.property().cacheable(),
