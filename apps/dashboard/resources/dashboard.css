@@ -17,19 +17,15 @@
   display: table-row;
 }
 
-.dashboard-row.green {
+.green {
   background-color: green;
 }
 
-.dashboard-row.yellow {
-  background-color: yellow;
+.white {
+  background-color: white;
 }
 
-.dashboard-row.orange {
-  background-color: orange;
-}
-
-.dashboard-row.red {
+.red {
   background-color: red;
 }
 

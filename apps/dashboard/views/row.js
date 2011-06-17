@@ -21,12 +21,12 @@ Dashboard.RowView = SC.View.extend( SC.ContentDisplay,
   contentDisplayProperties: 'dateAndTimeEntered siteName shiftDate shiftTime employeeName update'.w(),
 
   isContextMenuEnabled: NO,
-
+  
   contextMenu: function(evt) {
     var menuItems = [
       { title: 'Updated Client', target: Dashboard.statechart, action: 'updatedClient' }
     ];
-
+  
     var menu = SC.MenuPane.create({
       layout: { width: 150 },
       items: menuItems
@@ -65,7 +65,7 @@ Dashboard.RowView = SC.View.extend( SC.ContentDisplay,
     context.addClass(this._statusClasses[content.get('status')]);
   },
 
-  _statusClasses: ['red', 'white'],
+  _statusClasses: ['white', 'green', 'red'],
 
   transform: function(key, value) {
     switch (key) {

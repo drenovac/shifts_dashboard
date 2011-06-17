@@ -9,8 +9,7 @@
   @extends SC.Object
 */
 
-var FIFTEEN_MINUTES     = 15*60*1000;
-var THIRTY_MINUTES      = 30*60*1000;
+var THIRTY_MINUTES     = 30*60*1000;
 
 Dashboard.Shift = SC.Object.extend(
   /** @scope Dashboard.Shift.prototype */ {
@@ -24,10 +23,9 @@ Dashboard.Shift = SC.Object.extend(
       age = Dashboard.get('updatedAt') - this.get('callTaken');
     }
 
-    // console.log(age)
-
-    if (age < THIRTY_MINUTES) return 1;
-    else                      return 0;
+    if (age < THIRTY_MINUTES)          return 2;
+    else if (age < FOURTY_EIGHT_HOURS) return 1;
+    else                               return 0;
   }.property('callTaken').cacheable(),
 
   updatedAt: function() {
