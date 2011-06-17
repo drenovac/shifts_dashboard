@@ -72,25 +72,25 @@ Dashboard.FIXTURES = [];
         "source": "EDHEALQLD"
     }]
 */
-(function() {
-  var now = [
-        SC.DateTime.create()._ms,
-        SC.DateTime.create()._ms + FIFTEEN_MINUTES + 1,
-        SC.DateTime.create()._ms + THIRTY_MINUTES + 1
-      ],
-      idx, len;
-
-  for (idx=0, len=100; idx<len; ++idx) {
-    Dashboard.FIXTURES.pushObject(Dashboard.Shift.create({
-      client: 'Client ' + idx,
-      roster: now[0],
-      start: now[0],
-      finish: now[0],
-      callTaken: now[idx % 3],
-      employee: 'Employee ' + idx * 2,
-      source: 'Source ' + idx % 2
-    }));
-  }
-  
-  console.log('Created '+Dashboard.FIXTURES.length+' fixtures.');
-})();
+// (function() {
+//   var now = [
+//         SC.DateTime.create()._ms,
+//         SC.DateTime.create()._ms + FIFTEEN_MINUTES + 1,
+//         SC.DateTime.create()._ms + THIRTY_MINUTES + 1
+//       ],
+//       idx, len;
+// 
+//   for (idx=0, len=100; idx<len; ++idx) {
+//     Dashboard.FIXTURES.pushObject(Dashboard.Shift.create({
+//       client: 'Client ' + idx,
+//       roster: now[0],
+//       start: now[0],
+//       finish: now[0],
+//       callTaken: now[idx % 3],
+//       employee: 'Employee ' + idx * 2,
+//       source: 'Source ' + idx % 2
+//     }));
+//   }
+//   
+//   console.log('Created '+Dashboard.FIXTURES.length+' fixtures.');
+// })();
