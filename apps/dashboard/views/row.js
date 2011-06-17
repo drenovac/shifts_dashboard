@@ -20,19 +20,19 @@ Dashboard.RowView = SC.View.extend( SC.ContentDisplay,
   // CSS class names are of the form: "dashboard-cell <key>" and are <spans>
   contentDisplayProperties: 'dateAndTimeEntered siteName shiftDate shiftTime employeeName update'.w(),
 
-  isContextMenuEnabled: NO,
-  
-  contextMenu: function(evt) {
-    var menuItems = [
-      { title: 'Updated Client', target: Dashboard.statechart, action: 'updatedClient' }
-    ];
-  
-    var menu = SC.MenuPane.create({
-      layout: { width: 150 },
-      items: menuItems
-    }).popup(this);
-    return sc_super();
-  },
+  // isContextMenuEnabled: NO,
+  // 
+  // contextMenu: function(evt) {
+  //   var menuItems = [
+  //     { title: 'Updated Client', target: Dashboard.statechart, action: 'updatedClient' }
+  //   ];
+  // 
+  //   var menu = SC.MenuPane.create({
+  //     layout: { width: 150 },
+  //     items: menuItems
+  //   }).popup(this);
+  //   return sc_super();
+  // },
 
   // rows should be (in order):
   // - Date and Time entered
