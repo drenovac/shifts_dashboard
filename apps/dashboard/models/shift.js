@@ -10,6 +10,7 @@
 */
 
 var THIRTY_MINUTES     = 30*60*1000;
+var FOURTY_EIGHT_HOURS = 48*60*60*1000;
 
 Dashboard.Shift = SC.Object.extend(
   /** @scope Dashboard.Shift.prototype */ {
@@ -29,7 +30,8 @@ Dashboard.Shift = SC.Object.extend(
   }.property('callTaken').cacheable(),
 
   updatedAt: function() {
-    return 0; // FIXME: What is this property?
+    var dateTime = this.call_taken_date+' '+this.call_taken_time.slice(0,-8)+'+10:00';
+    return SC.DateTime.parse(dateTime, '%Y-%m-%d %H:%M:%S%Z')._ms;
   }.property(),
 
   date: function(key, value) {
