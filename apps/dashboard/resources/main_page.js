@@ -89,7 +89,7 @@ Dashboard.mainPage = SC.Page.design({
 
       valueBinding: SC.Binding.transform(function (value, binding) {
         return (value)
-          ? "Grid updated at: " + SC.DateTime.create(value).toFormattedString('%d/%m/%y %H:%M:%S')+ ' ('+value+')'
+          ? "Grid updated at: " + SC.DateTime.create(value).toFormattedString('%d/%m/%y %H:%M:%S')
           : "Fetching data for grid..." ;
       }).from('Dashboard.updatedAt')
     }),

@@ -62,7 +62,7 @@ Dashboard.Shift = SC.Object.extend(
   timeEntered: function() {
     return SC.DateTime.create(this.get('callTaken'))
         .adjust({ timezone: -600 })
-        .toFormattedString('%H:%M') + ' ('+this.get('callTaken')+')';
+        .toFormattedString('%H:%M');
   }.property('callTaken').cacheable(),
 
   dateAndTimeEntered: function() {
