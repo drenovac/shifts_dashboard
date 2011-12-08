@@ -10,29 +10,15 @@
 */
 
 var THIRTY_MINUTES     = 30*60*1000;
-var FOURTY_EIGHT_HOURS = 48*60*60*1000;
 
 Dashboard.Shift = SC.Object.extend(
   /** @scope Dashboard.Shift.prototype */ {
 
   status: function() {
-    var age =  this.get('shiftAt') - Dashboard.get('updatedAt'),
+    var now = Dashboard.get('updatedAt'),
         updatedAt = this.get('updatedAt');
 
-    // we return a color if the shifts starts in the next 48 hours
-    if (age < FOURTY_EIGHT_HOURS) {
-      if (!updatedAt) {
-        // if we've never updated, we turn green in the first 30 minutes,
-        if (age > (FOURTY_EIGHT_HOURS - THIRTY_MINUTES)) return 1; // green
-        // and red thereafter, unless
-        else return 2; // red
-      // we've updated the system, in which case we return green if it's been less than 30 minutens since we updated,
-      } else if ((Dashboard.get('updatedAt') - updatedAt) < THIRTY_MINUTES) return 1; // green
-      // and red otherwise
-      else return 2; // red
-      // shifts starting more than 48 hours from now show up as white
-    }
-    // otherwise, we return white
+    if (updatedAt && ((now - updatedAt) < THIRTY_MINUTES)) return 2; // red
     else return 0; // white
   }.property('callTaken').cacheable(),
 
