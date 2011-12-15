@@ -18,9 +18,9 @@ Dashboard.Shift = SC.Object.extend(
     var now = Dashboard.get('updatedAt'),
         updatedAt = this.get('updatedAt');
 
-    if (updatedAt && ((now - updatedAt) < THIRTY_MINUTES)) return 0; // white
+    if (updatedAt && ((updatedAt - now) > THIRTY_MINUTES)) return 0; // white
     else return 2; // red
-  }.property('callTaken').cacheable(),
+  }.property('updatedAt').cacheable(),
 
   shiftAt: function() {
     var dateTime = this.roster_date+' '+this.start_time.slice(0,-8)+'+10:00';
