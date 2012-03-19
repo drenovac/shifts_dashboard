@@ -11,7 +11,7 @@ Dashboard.mainPage = SC.Page.design({
   // Add childViews to this pane for views to display immediately on page 
   // load.
   mainPane: SC.MainPane.design({
-    childViews: 'appTitle sources shifts updated refresh'.w(),
+    childViews: 'appTitle sources shifts shiftsHeader updated refresh'.w(),
 
     appTitle: SC.LabelView.design({
       layout: { top: 30, left: 160, height: 30 },
@@ -46,8 +46,9 @@ Dashboard.mainPage = SC.Page.design({
       })
     }),
 
-    shifts: Dashboard.ScrollView.design({
-      layout: { top: 60, left: 150, right: 10, bottom: 30 },
+    shiftsHeader: Dashboard.ScrollView.design({
+      layout: { top: 60, left: 150, right: 26, height: 16 },
+      layerId: 'no-scroll',
       classNames: 'borders',
 
       contentView: Dashboard.CollectionView.design({
@@ -70,7 +71,45 @@ Dashboard.mainPage = SC.Page.design({
             );
             for (idx=0, len=keys.length; idx<len; ++idx) {
               key = keys[idx];
-              if (key === 'dateAndTimeEntered') key = "Date & Time Entered"; // HACK
+              if (key === 'dateAndTimeEntered') key = "Date/Time Actioned"; // HACK
+              context.push(
+                '<span class="dashboard-cell">', key.replace(SC.STRING_DECAMELIZE_REGEXP,'$1 $2').capitalize(), '</span>'
+              );
+            }
+            context.push('</div></div>');
+            sc_super();
+          } else {
+            sc_super();
+          }
+        }
+      })
+    }),
+
+    shifts: Dashboard.ScrollView.design({
+      layout: { top: 60, left: 150, right: 10, bottom: 30 },
+      classNames: 'borders',
+
+      contentView: Dashboard.CollectionView.design({
+        classNames: 'dashboard-table',
+
+        contentBinding: 'Dashboard.shifts.arrangedObjects',
+
+        exampleView: Dashboard.RowView,
+
+        render: function(context, firstTime) {
+          if (firstTime) {
+            var keys = Dashboard.RowView.prototype.contentDisplayProperties.copy(),
+                idx, len, key;
+        
+            keys.unshift('#'); // contentIndex
+        
+            context.push(
+              '<div class="dashboard-header-group" style="visibility: hidden">',
+              '<div class="dashboard-row">'
+            );
+            for (idx=0, len=keys.length; idx<len; ++idx) {
+              key = keys[idx];
+              if (key === 'dateAndTimeEntered') key = "Date/Time Actioned"; // HACK
               context.push(
                 '<span class="dashboard-cell">', key.replace(SC.STRING_DECAMELIZE_REGEXP,'$1 $2').capitalize(), '</span>'
               );

@@ -18,8 +18,8 @@ Dashboard.Shift = SC.Object.extend(
     var now = Dashboard.get('updatedAt'),
         updatedAt = this.get('updatedAt');
 
-    if (updatedAt && ((updatedAt - now) > THIRTY_MINUTES)) return 0; // white
-    else return 2; // red
+    if (updatedAt && ((now - updatedAt) > THIRTY_MINUTES)) return 2; // red
+    else return 0; // white
   }.property('updatedAt').cacheable(),
 
   shiftAt: function() {
@@ -28,10 +28,8 @@ Dashboard.Shift = SC.Object.extend(
   }.property(),
 
   updatedAt: function() {
-    if (!this.updated_date || !this.updated_time) return 0;
-
-    var dateTime = this.updated_date+' '+this.updated_time.slice(0,-8)+'+10:00';
-    return SC.DateTime.parse(dateTime, '%Y-%m-%d %H:%M:%S%Z')._ms;
+    if (!this.call_taken_date || !this.call_taken_time) return 0;
+    else return this.get('callTaken');
   }.property(),
 
   date: function(key, value) {

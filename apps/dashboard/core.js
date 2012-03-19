@@ -102,6 +102,7 @@ Dashboard = SC.Application.create(
 
   requestShifts: function() {
     // console.log('requesting shifts');
+    // SC.Request.getUrl(sc_static('api/v1.json'))
     SC.Request.getUrl('/api/v1')
       .notify(200, this, function (request) {
         Dashboard.statechart.invokeStateMethod('response', request);

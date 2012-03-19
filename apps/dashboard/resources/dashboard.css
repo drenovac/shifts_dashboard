@@ -62,3 +62,8 @@
   font-weight: bold !important;
   line-height: 26px !important;
 }
+
+#no-scroll, #no-scroll > div {
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+}
