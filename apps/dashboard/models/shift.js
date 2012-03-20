@@ -11,6 +11,23 @@
 
 var THIRTY_MINUTES     = 30*60*1000;
 
+// Figure out the correct timezone offset to add to datetimes.
+var TIMEZONE_OFFSET = -(new Date().getTimezoneOffset()/60);
+if (TIMEZONE_OFFSET > 0) {
+  if (String(TIMEZONE_OFFSET).length === 1) {
+    TIMEZONE_OFFSET = '+0' + TIMEZONE_OFFSET + ':00';
+  } else {
+    TIMEZONE_OFFSET = '+' + TIMEZONE_OFFSET + ':00';
+  }
+} else {
+  if (String(TIMEZONE_OFFSET).length === 2) {
+    TIMEZONE_OFFSET = '-0' + (-TIMEZONE_OFFSET) + ':00';
+  } else {
+    TIMEZONE_OFFSET = TIMEZONE_OFFSET + ':00';
+  }
+}
+console.log(TIMEZONE_OFFSET);
+
 Dashboard.Shift = SC.Object.extend(
   /** @scope Dashboard.Shift.prototype */ {
 
@@ -23,7 +40,7 @@ Dashboard.Shift = SC.Object.extend(
   }.property('updatedAt').cacheable(),
 
   shiftAt: function() {
-    var dateTime = this.roster_date+' '+this.start_time.slice(0,-8)+'+10:00';
+    var dateTime = this.roster_date+' '+this.start_time.slice(0,-8)+TIMEZONE_OFFSET;
     return SC.DateTime.parse(dateTime, '%Y-%m-%d %H:%M:%S%Z')._ms;
   }.property(),
 
@@ -38,8 +55,7 @@ Dashboard.Shift = SC.Object.extend(
   }.property().cacheable(),
 
   callTaken: function(key, value) {
-    var dateTime = this.call_taken_date+' '+this.call_taken_time.slice(0,-8)+'+10:00';
-    // console.log(dateTime);
+    var dateTime = this.call_taken_date+' '+this.call_taken_time.slice(0,-8)+TIMEZONE_OFFSET;
     return SC.DateTime.parse(dateTime, '%Y-%m-%d %H:%M:%S%Z')._ms;
   }.property().cacheable(),
 
