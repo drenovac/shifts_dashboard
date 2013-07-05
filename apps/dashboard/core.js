@@ -30,7 +30,7 @@ Dashboard = SC.Application.create(
         Dashboard.sources.set('content', [
           SC.Object.create({ name: 'CSS NSW', sources: ['EDHEAL'] }),
           SC.Object.create({ name: 'CSS QLD', sources: ['EDHEALQLD'] }),
-          SC.Object.create({ name: 'CSS VIC', sources: ['EDHEALVIC'] }),
+          SC.Object.create({name:"CSS VIC/SA/NT",sources:["EDHEALVIC","EDHEALSA","EDHEALNT"]}),
           SC.Object.create({ name: 'ALL', sources: [] }) // implies "all"
         ]);
 
