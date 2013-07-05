@@ -16,7 +16,9 @@ Dashboard = SC.Application.create(
   updatedAt: null,
 
   statechart: Ki.Statechart.create({
+    trace: true,
     rootState: Ki.State.design({
+      initialSubstate: "ZOOMEDOUT",
       enterState: function() {
         Dashboard.mainPage.get('mainPane').append();
 
@@ -75,7 +77,55 @@ Dashboard = SC.Application.create(
         Dashboard.set('names', names);
         ary = Dashboard.computeFilteredShifts(Dashboard._shifts);
         Dashboard.shifts.set('content', ary);
-      }
+      },
+
+      ZOOMEDOUT: Ki.State.design({
+        enterState: function() {
+          var pane = Dashboard.mainPage.get('mainPane'),
+            layout;
+          // pane.get('appTitle').set('isVisible', true);
+          // pane.get('sources').set('isVisible', true);
+
+          // ShiftsHeader
+          layout = pane.getPath('shiftsHeader.layout');
+          layout.top = 60;
+          layout.left = 150;
+          pane.get('shiftsHeader').propertyDidChange('layout');
+          // Shifts
+          layout = pane.getPath('shifts.layout');
+          layout.top = 60;
+          layout.left = 150;
+          pane.get('shifts').propertyDidChange('layout');
+        },
+
+        zoomView: function(sender) {
+          this.gotoState('ZOOMEDIN');
+        },
+      }),
+
+      ZOOMEDIN: Ki.State.design({
+        enterState: function() {
+          var pane = Dashboard.mainPage.get('mainPane'),
+            layout;
+          // pane.get('appTitle').set('isVisible', false);
+          // pane.get('sources').set('isVisible', false);
+
+          // ShiftsHeader
+          layout = pane.getPath('shiftsHeader.layout');
+          layout.top = 10;
+          layout.left = 10;
+          pane.get('shiftsHeader').propertyDidChange('layout');
+          // Shifts
+          layout = pane.getPath('shifts.layout');
+          layout.top = 10;
+          layout.left = 10;
+          pane.get('shifts').propertyDidChange('layout');
+
+        },
+        zoomView: function(sender) {
+          this.gotoState('ZOOMEDOUT');
+        },
+      })
 
     })
   }),
@@ -101,7 +151,7 @@ Dashboard = SC.Application.create(
   names: [], // default to "all names"
 
   requestShifts: function() {
-    // console.log('requesting shifts');
+    console.log('requesting shifts');
     // SC.Request.getUrl(sc_static('api/v1.json'))
     SC.Request.getUrl('/api/v1')
       .notify(200, this, function (request) {

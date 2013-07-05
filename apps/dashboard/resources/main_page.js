@@ -7,11 +7,15 @@
 // This page describes the main user interface for your application.  
 Dashboard.mainPage = SC.Page.design({
 
+  // Outlets
+
+
   // The main pane is made visible on screen as soon as your app is loaded.
   // Add childViews to this pane for views to display immediately on page 
   // load.
   mainPane: SC.MainPane.design({
-    childViews: 'appTitle sources shifts shiftsHeader updated refresh'.w(),
+    defaultResponder: 'Dashboard.statechart',
+    childViews: 'appTitle sources shifts shiftsHeader updated refresh zoom currentSource'.w(),
 
     appTitle: SC.LabelView.design({
       layout: { top: 30, left: 160, height: 30 },
@@ -46,8 +50,13 @@ Dashboard.mainPage = SC.Page.design({
       })
     }),
 
+    currentSource: SC.LabelView.design({
+      layout: { left: 10, bottom: 5, height: 20, width: 120 },
+      valueBinding: 'Dashboard.sources*selection.firstObject.name'
+    }),
+
     shiftsHeader: Dashboard.ScrollView.design({
-      layout: { top: 60, left: 150, right: 26, height: 16 },
+      layout: { top: 60, left: 150, right: 10, height: 25 },
       layerId: 'no-scroll',
       classNames: 'borders',
 
@@ -124,7 +133,7 @@ Dashboard.mainPage = SC.Page.design({
     }),
 
     updated: SC.LabelView.design({
-      layout: { left: 160, bottom: 5, height: 20, right: 20 },
+      layout: { left: 160, bottom: 5, height: 20, width: 200 },
 
       valueBinding: SC.Binding.transform(function (value, binding) {
         return (value)
@@ -134,11 +143,18 @@ Dashboard.mainPage = SC.Page.design({
     }),
 
     refresh: SC.ButtonView.design({
-      layout: { width: 80, top: 30, height: 23, right: 10 },
+      layout: { width: 80, bottom: 5, height: 23, right: 10 },
 
       title: "Refresh",
       action: 'requestShifts',
       target: Dashboard
+    }),
+
+    zoom: SC.ButtonView.design({
+      layout: { width: 80, bottom: 5, height: 23, right: 100 },
+
+      title: "Zoom",
+      action: 'zoomView'
     })
   })
 
