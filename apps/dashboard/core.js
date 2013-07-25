@@ -15,6 +15,8 @@ Dashboard = SC.Application.create(
 
   updatedAt: null,
 
+  local: SC.UserDefaults.create({ appDomain: "shifts" }),
+
   statechart: Ki.Statechart.create({
     trace: true,
     rootState: Ki.State.design({
@@ -28,6 +30,8 @@ Dashboard = SC.Application.create(
         //   ary = Dashboard.computeFilteredShifts(ary);
         //   Dashboard.shifts.set('content', ary);
         // }
+
+        Dashboard.setFontSize(Dashboard.local.get('fontSize'));
 
         Dashboard.sources.set('content', [
           SC.Object.create({ name: 'CSS NSW', sources: ['EDHEAL'] }),
@@ -44,6 +48,7 @@ Dashboard = SC.Application.create(
         });
 
         Dashboard.requestShifts();
+        Dashboard.scroll();
       },
 
       updatedClient: function(sender) {
@@ -66,6 +71,7 @@ Dashboard = SC.Application.create(
         Dashboard._shifts = ary;
         ary = Dashboard.computeFilteredShifts(ary);
         Dashboard.shifts.set('content', ary);
+        Dashboard.resetScroll();
       },
 
       changeSource: function(sender) {
@@ -77,14 +83,19 @@ Dashboard = SC.Application.create(
         Dashboard.set('names', names);
         ary = Dashboard.computeFilteredShifts(Dashboard._shifts);
         Dashboard.shifts.set('content', ary);
+        Dashboard.resetScroll();
+      },
+
+      bigger: function() {
+        Dashboard.setFontSize
       },
 
       ZOOMEDOUT: Ki.State.design({
         enterState: function() {
           var pane = Dashboard.mainPage.get('mainPane'),
             layout;
-          // pane.get('appTitle').set('isVisible', true);
-          // pane.get('sources').set('isVisible', true);
+          pane.get('appTitle').set('isVisible', true);
+          pane.get('sources').set('isVisible', true);
 
           // ShiftsHeader
           layout = pane.getPath('shiftsHeader.layout');
@@ -107,8 +118,8 @@ Dashboard = SC.Application.create(
         enterState: function() {
           var pane = Dashboard.mainPage.get('mainPane'),
             layout;
-          // pane.get('appTitle').set('isVisible', false);
-          // pane.get('sources').set('isVisible', false);
+          pane.get('appTitle').set('isVisible', false);
+          pane.get('sources').set('isVisible', false);
 
           // ShiftsHeader
           layout = pane.getPath('shiftsHeader.layout');
@@ -159,6 +170,50 @@ Dashboard = SC.Application.create(
       })
       .set('isJSON', true)
       .send() ;
+  },
+
+  lastMouse: 0,
+  scrollTime: 8000,
+  scrollDistance: 1000,
+  delay: 3000,
+  scroll: function() {
+    var now = performance.now(),
+      sinceMove = now - Dashboard.lastMouse
+      delay = Dashboard.delay;
+    if (sinceMove > delay) {
+      var shifts = Dashboard.mainPage.getPath('mainPane.shifts').get('layer'),
+        viewHeight = shifts.offsetHeight,
+        fullHeight = shifts.scrollHeight,
+        current = shifts.scrollTop,
+        passed = sinceMove - delay,
+        progress = passed / Dashboard.scrollTime;
+      shifts.scrollTop = Dashboard.scrollDistance * progress;
+      if (shifts.scrollTop < fullHeight-viewHeight) {
+        requestAnimationFrame(Dashboard.scroll);
+      }else {
+        console.log('Reached the bottom');
+        Dashboard.resetScroll();
+        setTimeout(Dashboard.scroll, 500);
+      }
+    } else {
+      setTimeout(Dashboard.scroll, 500);
+    }
+  },
+  resetScroll: function() {
+    var shifts = Dashboard.mainPage.getPath('mainPane.shifts').get('layer');
+    Dashboard.lastMouse = performance.now();
+    shifts.scrollTop = 0;
+
+  },
+
+  _currentFontSize: 100,
+  setFontSize: function(fontSize) {
+    if (!fontSize) {
+      fontSize = '100'; 
+    }
+    fontSize = parseInt(fontSize, 10);
+    this._currentFontSize = fontSize;
+    Dashboard.local.set('fontSize', fontSize);
   }
 
 });

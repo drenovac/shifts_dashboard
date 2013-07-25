@@ -8,6 +8,7 @@
 Dashboard.mainPage = SC.Page.design({
 
   // Outlets
+  shifts: SC.outlet('mainPane.shifts.contentView'),
 
 
   // The main pane is made visible on screen as soon as your app is loaded.
@@ -15,7 +16,7 @@ Dashboard.mainPage = SC.Page.design({
   // load.
   mainPane: SC.MainPane.design({
     defaultResponder: 'Dashboard.statechart',
-    childViews: 'appTitle sources shifts shiftsHeader updated refresh zoom currentSource'.w(),
+    childViews: 'appTitle sources shifts shiftsHeader updated refresh zoom currentSource speed speedDisplay'.w(),
 
     appTitle: SC.LabelView.design({
       layout: { top: 30, left: 160, height: 30 },
@@ -98,6 +99,11 @@ Dashboard.mainPage = SC.Page.design({
       layout: { top: 60, left: 150, right: 10, bottom: 30 },
       classNames: 'borders',
 
+      mouseMoved: function() {
+        // console.log("mouseMove");
+        Dashboard.lastMouse = performance.now();
+      },
+
       contentView: Dashboard.CollectionView.design({
         classNames: 'dashboard-table',
 
@@ -155,6 +161,34 @@ Dashboard.mainPage = SC.Page.design({
 
       title: "Zoom",
       action: 'zoomView'
+    }),
+
+    speed: SC.SliderView.extend({
+      layout: { width: 250, height: 18, bottom: 5, right: 250 },
+      displayValue: "Speed",
+      valueBinding: 'Dashboard.scrollTime',
+      minimum: 5000,
+      maximum: 40000,
+      step: 1000
+    }),
+    speedDisplay: SC.LabelView.design({
+      layout: {width: 40, height: 18, bottom: 5, right: 200 },
+      valueBinding: SC.Binding.oneWay('Dashboard.scrollTime').transform(function(value) {
+        return value/1000
+      })
+    }),
+
+    bigger: SC.ButtonView.design({
+      layout: { width: 80, bottom: 5, height: 23, right: 300 },
+
+      title: "+",
+      action: 'bigger'
+    }),
+    smaller: SC.ButtonView.design({
+      layout: { width: 80, bottom: 5, height: 23, right: 200 },
+
+      title: "-",
+      action: 'smaller'
     })
   })
 
