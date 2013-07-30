@@ -16,7 +16,7 @@ Dashboard.mainPage = SC.Page.design({
   // load.
   mainPane: SC.MainPane.design({
     defaultResponder: 'Dashboard.statechart',
-    childViews: 'appTitle sources shifts shiftsHeader updated refresh zoom currentSource speed speedDisplay'.w(),
+    childViews: 'appTitle sources shifts shiftsHeader updated dates refresh zoom currentSource speed speedDisplay'.w(),
 
     appTitle: SC.LabelView.design({
       layout: { top: 30, left: 160, height: 30 },
@@ -146,6 +146,20 @@ Dashboard.mainPage = SC.Page.design({
           ? "Grid updated at: " + SC.DateTime.create(value).toFormattedString('%d/%m/%y %H:%M:%S')
           : "Fetching data for grid..." ;
       }).from('Dashboard.updatedAt')
+    }),
+
+    dates: SC.SegmentedView.extend({
+      layout: { width: 300, height: 24, right: 520, bottom: 5 },
+      itemTitleKey: 'title',
+      itemValueKey: 'value',
+      items: [
+        { title:'All', value: 0},
+        { title: 'Today', value: 1},
+        { title: '2 Days', value: 2},
+        { title: '4 Days', value: 4},
+        { title: '7 Days', value: 7 }
+      ],
+      valueBinding: 'Dashboard.viewDates'
     }),
 
     refresh: SC.ButtonView.design({

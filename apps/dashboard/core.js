@@ -14,6 +14,13 @@ Dashboard = SC.Application.create(
   VERSION: '0.1.0',
 
   updatedAt: null,
+  viewDates: 0,
+  viewDatesDidChange: function() {
+    this.invokeLater(function() {
+      // console.log("Date Value changed");
+      Dashboard.statechart.sendAction('changeSource');
+    },0);
+  }.observes('viewDates'),
 
   local: SC.UserDefaults.create({ appDomain: "shifts" }),
 
@@ -145,13 +152,26 @@ Dashboard = SC.Application.create(
 
   computeFilteredShifts: function(shifts) {
     var names = this.get('names'),
-        idx, len, obj, ary = [];
+        viewDates = this.get('viewDates'),
+        startDate, endDate,
+        allShifts = false,
+        shiftAt, idx, len, obj, ary = [];
 
-    if (names.length === 0) return shifts;
+    // Filter Visible Dates
+    if (viewDates) {
+      startDate = SC.DateTime.create({hour:0})._ms
+      endDate = SC.DateTime.create({hour:0}).advance({day: viewDates})._ms
+    }
+
+    if (names.length === 0) allShifts = true;
 
     for (idx=0, len=shifts.length; idx<len; ++idx) {
       obj = shifts[idx];
-      if (names.indexOf(obj.get('source')) !== -1) {
+      shiftAt = obj.get('shiftAt')
+      if (
+        (allShifts || names.indexOf(obj.get('source')) !== -1) && 
+        (!viewDates || (shiftAt >= startDate && shiftAt <= endDate))
+      ) {
         ary.push(obj);
       }
     }
@@ -192,8 +212,8 @@ Dashboard = SC.Application.create(
         requestAnimationFrame(Dashboard.scroll);
       }else {
         console.log('Reached the bottom');
-        Dashboard.resetScroll();
-        setTimeout(Dashboard.scroll, 500);
+        setTimeout(Dashboard.resetScroll, 1500); // Pause at the bottom for a while.
+        setTimeout(Dashboard.scroll, 500); // Then start scrolling.
       }
     } else {
       setTimeout(Dashboard.scroll, 500);
