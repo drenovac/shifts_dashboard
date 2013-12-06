@@ -41,9 +41,9 @@ Dashboard = SC.Application.create(
         Dashboard.setFontSize(Dashboard.local.get('fontSize'));
 
         Dashboard.sources.set('content', [
-          SC.Object.create({ name: 'CSS NSW', sources: ['EDHEAL'] }),
+          SC.Object.create({ name: 'CSS NSW/ACT/VIC', sources: ['EDHEAL',"EDHEALACT","EDHEALVIC"] }),
           SC.Object.create({ name: 'CSS QLD', sources: ['EDHEALQLD'] }),
-          SC.Object.create({name:"CSS VIC/SA/NT",sources:["EDHEALVIC","EDHEALSA","EDHEALNT"]}),
+          SC.Object.create({name:"CSS SA/NT",sources:["EDHEALSA","EDHEALNT"]}),
           SC.Object.create({ name: 'ALL', sources: [] }) // implies "all"
         ]);
 
