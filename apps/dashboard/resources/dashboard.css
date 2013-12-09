@@ -70,3 +70,7 @@
   overflow-x: hidden !important;
   overflow-y: hidden !important;
 }
+
+#weekly-shifts {
+  font-size: 22px;
+}

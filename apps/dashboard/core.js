@@ -63,10 +63,17 @@ Dashboard = SC.Application.create(
       },
 
       response: function(request) {
-        var json = request.get('response'),
+        var response = request.get('response'),
+            json = response['entries'],
+            totals = response['totals'],
+            weeklyShifts = {},
             idx, len, hash, ary = [];
 
         // console.log(JSON.stringify(json));
+        totals.forEach(function(total) {
+          weeklyShifts[total.company] = total;
+        });
+        Dashboard.sources.set('weeklyShifts', weeklyShifts);
 
         for (idx=0, len=json.length; idx<len; ++idx) {
           hash = json[idx];
@@ -82,9 +89,7 @@ Dashboard = SC.Application.create(
       },
 
       changeSource: function(sender) {
-        var sel = Dashboard.sources.get('selection'),
-            selectedObject = sel ? sel.firstObject() : null,
-            names = selectedObject ? selectedObject.get('sources') : [],
+        var names = Dashboard.sources.get('names'),
             ary ;
 
         Dashboard.set('names', names);
@@ -94,55 +99,49 @@ Dashboard = SC.Application.create(
       },
 
       bigger: function() {
-        Dashboard.setFontSize
+        // Dashboard.setFontSize
       },
 
       ZOOMEDOUT: Ki.State.design({
         enterState: function() {
           var pane = Dashboard.mainPage.get('mainPane'),
             layout;
-          pane.get('appTitle').set('isVisible', true);
           pane.get('sources').set('isVisible', true);
 
           // ShiftsHeader
           layout = pane.getPath('shiftsHeader.layout');
-          layout.top = 60;
           layout.left = 150;
           pane.get('shiftsHeader').propertyDidChange('layout');
           // Shifts
           layout = pane.getPath('shifts.layout');
-          layout.top = 60;
           layout.left = 150;
           pane.get('shifts').propertyDidChange('layout');
         },
 
         zoomView: function(sender) {
           this.gotoState('ZOOMEDIN');
-        },
+        }
       }),
 
       ZOOMEDIN: Ki.State.design({
         enterState: function() {
           var pane = Dashboard.mainPage.get('mainPane'),
             layout;
-          pane.get('appTitle').set('isVisible', false);
           pane.get('sources').set('isVisible', false);
 
           // ShiftsHeader
           layout = pane.getPath('shiftsHeader.layout');
-          layout.top = 10;
           layout.left = 10;
           pane.get('shiftsHeader').propertyDidChange('layout');
           // Shifts
           layout = pane.getPath('shifts.layout');
-          layout.top = 10;
           layout.left = 10;
           pane.get('shifts').propertyDidChange('layout');
 
         },
         zoomView: function(sender) {
           this.gotoState('ZOOMEDOUT');
-        },
+        }
       })
 
     })
@@ -183,8 +182,7 @@ Dashboard = SC.Application.create(
 
   requestShifts: function() {
     console.log('requesting shifts');
-    // SC.Request.getUrl(sc_static('api/v1.json'))
-    SC.Request.getUrl('/api/v1')
+    SC.Request.getUrl('/api/v2')
       .notify(200, this, function (request) {
         Dashboard.statechart.invokeStateMethod('response', request);
       })

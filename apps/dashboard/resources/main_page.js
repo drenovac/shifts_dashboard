@@ -10,23 +10,28 @@ Dashboard.mainPage = SC.Page.design({
   // Outlets
   shifts: SC.outlet('mainPane.shifts.contentView'),
 
-
   // The main pane is made visible on screen as soon as your app is loaded.
   // Add childViews to this pane for views to display immediately on page 
   // load.
   mainPane: SC.MainPane.design({
     defaultResponder: 'Dashboard.statechart',
-    childViews: 'appTitle sources shifts shiftsHeader updated dates refresh zoom currentSource speed speedDisplay'.w(),
+    childViews: 'appTitle weekly sources shifts shiftsHeader updated dates refresh zoom currentSource speed speedDisplay'.w(),
 
     appTitle: SC.LabelView.design({
-      layout: { top: 30, left: 160, height: 30 },
+      layout: { top: 5, left: 160, height: 30 },
       tagName: 'div',
       layerId: 'title',
       value: 'Shifts Dashboard'
     }),
 
+    weekly: SC.LabelView.design({
+      layout: { top: 8, left: 560, height: 30 },
+      valueBinding: "Dashboard.sources.weeklyShiftsString",
+      layerId: 'weekly-shifts'
+    }),
+
     sources: Dashboard.ScrollView.design({
-      layout: { top: 60, width: 130, left: 10, bottom: 30 },
+      layout: { top: 35, width: 130, left: 10, bottom: 30 },
 
       contentView: Dashboard.CollectionView.design({
         tagName: 'ul',
@@ -57,7 +62,7 @@ Dashboard.mainPage = SC.Page.design({
     }),
 
     shiftsHeader: Dashboard.ScrollView.design({
-      layout: { top: 60, left: 150, right: 10, height: 25 },
+      layout: { top: 35, left: 150, right: 10, height: 25 },
       layerId: 'no-scroll',
       classNames: 'borders',
 
@@ -96,7 +101,7 @@ Dashboard.mainPage = SC.Page.design({
     }),
 
     shifts: Dashboard.ScrollView.design({
-      layout: { top: 60, left: 150, right: 10, bottom: 30 },
+      layout: { top: 35, left: 150, right: 10, bottom: 30 },
       classNames: 'borders',
 
       mouseMoved: function() {
