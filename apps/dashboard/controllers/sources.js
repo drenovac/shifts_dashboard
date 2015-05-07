@@ -21,28 +21,33 @@ Dashboard.sources = SC.ArrayController.create({
 
   weeklyShifts: null,
   weeklyShiftsString: function() {
-    var ret = "Total Weekly Shift Bookings: %@ Hours",
+    var ret = "Weekly Bookings: %@",
         names = this.get('names'),
         weeklyShifts = this.get('weeklyShifts'),
-        total = 0,
+        shift = null,
+        total = "",
         allShifts = false;
+
+    function display2(numberStr) {
+      return Math.round(parseInt(numberStr, 10) / 100) / 100;
+    }
 
     if (weeklyShifts === null) {
       // do nothing;
     } else if (names.length === 0) {
-      for (var week in weeklyShifts) {
-        if (weeklyShifts.hasOwnProperty(week)) {
-//          console.log('Getting week', week, weeklyShifts[week]);
-          total += parseInt(weeklyShifts[week].user_1, 10);
+      for (var name in weeklyShifts) {
+        if (weeklyShifts.hasOwnProperty(name)) {
+//          console.log('Getting name', name, weeklyShifts[name]);
+          shift = weeklyShifts[name];
+          total += shift.user_2+": <span class='number'>"+display2(shift.user_1)+"</span> ";
         }
       }
     } else {
-      names.forEach(function(sel) {
-        total += parseInt(weeklyShifts[sel].user_1, 10);
+      names.forEach(function(name) {
+        shift = weeklyShifts[name];
+        total += shift.user_2 + ": <span class='number'>" + display2(shift.user_1) + "</span> ";
       });
     }
-
-    total = Math.round(total / 100) / 100;
 
     return ret.fmt(total);
   }.property('weeklyShifts', 'names').cacheable()

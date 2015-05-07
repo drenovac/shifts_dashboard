@@ -73,4 +73,10 @@
 
 #weekly-shifts {
   font-size: 22px;
+  text-overflow: ellipsis;
+}
+
+#weekly-shifts .number {
+  font-weight: bold;
+  text-decoration: underline;
 }

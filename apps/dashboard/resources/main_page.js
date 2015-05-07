@@ -25,9 +25,11 @@ Dashboard.mainPage = SC.Page.design({
     }),
 
     weekly: SC.LabelView.design({
-      layout: { top: 8, left: 560, height: 30 },
+      layout: { top: 8, left: 420, right: 5, height: 30 },
       valueBinding: "Dashboard.sources.weeklyShiftsString",
-      layerId: 'weekly-shifts'
+      layerId: 'weekly-shifts',
+      textAlign: SC.ALIGN_CENTER,
+      escapeHTML: false
     }),
 
     sources: Dashboard.ScrollView.design({
@@ -144,7 +146,7 @@ Dashboard.mainPage = SC.Page.design({
     }),
 
     updated: SC.LabelView.design({
-      layout: { left: 160, bottom: 5, height: 20, width: 200 },
+      layout: { left: 160, bottom: 5, height: 20, width: 250 },
 
       valueBinding: SC.Binding.transform(function (value, binding) {
         return (value)
